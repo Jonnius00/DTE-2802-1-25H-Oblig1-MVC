@@ -1,0 +1,112 @@
+Presentation outline, divided into logical blocks, with explanations for each part. 
+This is used to guide my video recording and parallel narration:
+
+1. Introduction & Project Overview (2 minutes)
+Show:
+Solution structure in Visual Studio/VS Code.
+The three main entity classes: Blog, Post, Comment.
+
+Explain:
+The project is a simple educational blog solution built with ASP.NET Core Razor Pages and Entity Framework using the Repository Design pattern.
+Hierarchical structure: Blog ? Post ? Comment with ownership and authorization features.
+SQLite database backend with Entity Framework for data persistence.
+All requirements focus on authentication, CRUD operations, and ownership management.
+
+2. Data Models & Relationships (1.5 minutes)
+Show:
+Comment.cs, Post.cs, and Blog.cs model classes.
+Entity relationships and foreign key properties.
+
+Explain:
+Entity relationships: Blog contains Posts, Posts contain Comments.
+OwnerId property for ownership tracking across all entities.
+Validation logic (e.g., Content property validation in Comment model).
+Navigation properties for Entity Framework relationships.
+
+3. Authentication & Authorization Foundation (2 minutes)
+Show:
+Login and registration functionality (ASP.NET Core Identity).
+Attempt to access create features without login (redirect to login).
+Only logged-in users can create blogs, posts, and comments.
+
+Explain:
+ASP.NET Core Identity integration for user management.
+How authentication restricts access to creation features.
+Ownership tracking: The logged-in user becomes the owner of created objects (OwnerId is set to current user).
+Authorization requirements for all creation operations.
+==============================================================
+4. Blog Operations (CR Only) (2 minutes)
+Show:
+List of all blogs (Blog Index page).
+Creating a new blog (show the form and process).
+Viewing blog details (shows posts in the blog).
+
+Explain:
+Blogs can be created and read only (no edit/delete as per requirements).
+Blog ownership assignment to current user.
+Each blog can contain multiple posts.
+Introduction to Open/Closed status concept.
+Parameter passing via GET and POST requests (no sessions used).
+
+5. Post CRUD Operations (3 minutes)
+Show:
+Viewing posts in a blog.
+Creating, editing, and deleting posts (demonstrate forms and actions).
+Ownership checks: Only the owner can edit/delete their posts.
+Attempting to edit another user's post (authorization failure).
+Deleting a post and its comments (cascade delete demonstration).
+
+Explain:
+Full CRUD functionality for posts.
+Authorization ensures only owners can modify/delete their posts.
+Posts are linked to blogs via foreign key relationship.
+Repository pattern usage in controller actions.
+Parameter passing through form submissions and URL parameters.
+
+6. Comment CRUD & Blog Open/Close Feature (2.5 minutes)
+Show:
+Viewing comments under a post.
+Creating, editing, and deleting comments.
+Ownership checks for comments.
+Closing a blog and attempting to add post/comment (should be prevented).
+Reopening blog to restore functionality.
+
+Explain:
+Comments are linked to posts via foreign key relationship.
+Only owners can modify/delete their comments.
+Blogs can be open or closed to new posts/comments.
+The UI and backend enforce this restriction.
+Business rule: closed blogs prevent new content creation.
+
+7. Repository Pattern & Architecture (1 minute)
+Show:
+Repository interface and implementation files.
+Dependency injection configuration in Program.cs.
+
+Explain:
+How Repository pattern separates data access from business logic.
+Dependency injection in Razor Pages and controllers.
+Benefits for testing and maintainability.
+Clean architecture principles in action.
+
+8. Testing & Test Coverage (1 minute)
+Show:
+Run unit tests in Visual Studio/Test Explorer.
+Display test results and coverage report.
+
+Explain:
+Nearly 100% test coverage on controllers and page models.
+Test structure using xUnit and Moq for mocking.
+How mocking enables isolated testing of business logic.
+Tests ensure reliability and correctness of CRUD operations and authorization logic.
+Coverage of ownership verification and business rule enforcement.
+
+9. Conclusion (0.5 minutes)
+Summarize:
+The solution meets all requirements: authentication, CRUD operations, ownership management, open/close functionality, and comprehensive testing.
+Repository Design pattern provides clean separation of concerns and maintainability.
+Parameter passing exclusively through GET and POST requests (no sessions).
+Cascade delete maintains data integrity when removing container objects.
+Ready for educational demonstration and real-world extension.
+
+Note: Throughout sections 4-6, emphasize how all data is passed via GET and POST requests with no session usage, demonstrating this with form submissions and URL parameters during the live demonstration.

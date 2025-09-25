@@ -1,0 +1,53 @@
+@model IEnumerable<DTE_2802_1_25H_Oblig1_MVC.Models.Blog>
+@{
+    ViewData["Title"] = "Blogs";
+}
+
+<h1>Blogs</h1>
+<p>
+    <a asp-controller="Blog" asp-action="Create" class="btn btn-primary">Create New Blog</a>
+    <a asp-controller="Post" asp-action="Index" class="btn btn-secondary">View All Posts</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OwnerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsOpen)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <th>
+                    @Html.DisplayFor(modelItem => item.OwnerId)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsOpen)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
