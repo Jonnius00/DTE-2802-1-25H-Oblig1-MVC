@@ -79,7 +79,6 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 
 /// <summary>
 /// Registers Repository pattern implementations for DI.
-/// Implements the Repository Design pattern 
 /// 
 /// Service Lifetime: Scoped
 /// - New instance per HTTP request
@@ -130,8 +129,6 @@ if (!app.Environment.IsDevelopment())
 
 /// <summary>
 /// Redirects HTTP requests to HTTPS for security.
-/// Ensures all communication is encrypted, protecting user data and authentication tokens.
-/// Critical for login functionality and sensitive blog content.
 /// </summary>
 app.UseHttpsRedirection();
 
